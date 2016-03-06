@@ -140,7 +140,7 @@ public class QRCodeReaderViewController: UIViewController {
 
     cameraView.layer.insertSublayer(codeReader.previewLayer, atIndex: 0)
 
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationDidChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(QRCodeReaderViewController.orientationDidChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
   }
 
   required public init?(coder aDecoder: NSCoder) {
@@ -204,7 +204,7 @@ public class QRCodeReaderViewController: UIViewController {
     if showSwitchCameraButton && codeReader.hasFrontDevice() {
       let newSwitchCameraButton = SwitchCameraButton()
       newSwitchCameraButton.translatesAutoresizingMaskIntoConstraints = false
-      newSwitchCameraButton.addTarget(self, action: "switchCameraAction:", forControlEvents: .TouchUpInside)
+      newSwitchCameraButton.addTarget(self, action: #selector(QRCodeReaderViewController.switchCameraAction(_:)), forControlEvents: .TouchUpInside)
       view.addSubview(newSwitchCameraButton)
 
       switchCameraButton = newSwitchCameraButton
@@ -213,7 +213,7 @@ public class QRCodeReaderViewController: UIViewController {
     if showTorchButton && codeReader.isTorchAvailable() {
       let newToggleTorchButton = ToggleTorchButton()
       newToggleTorchButton.translatesAutoresizingMaskIntoConstraints = false
-      newToggleTorchButton.addTarget(self, action: "toggleTorchAction:", forControlEvents: .TouchUpInside)
+      newToggleTorchButton.addTarget(self, action: #selector(QRCodeReaderViewController.toggleTorchAction(_:)), forControlEvents: .TouchUpInside)
       view.addSubview(newToggleTorchButton)
       toggleTorchButton = newToggleTorchButton
     }
@@ -221,7 +221,7 @@ public class QRCodeReaderViewController: UIViewController {
     cancelButton.translatesAutoresizingMaskIntoConstraints = false
     cancelButton.setTitle(cancelButtonTitle, forState: .Normal)
     cancelButton.setTitleColor(.grayColor(), forState: .Highlighted)
-    cancelButton.addTarget(self, action: "cancelAction:", forControlEvents: .TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(QRCodeReaderViewController.cancelAction(_:)), forControlEvents: .TouchUpInside)
     view.addSubview(cancelButton)
   }
 
